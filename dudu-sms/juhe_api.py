@@ -7,7 +7,7 @@ from sqlalchemy.sql import text
 
 def connect_mysql(distinct):
     try:
-        engine = create_engine('mysql+pymysql://zlzy:Zlzy1708@zlzy.cqlpyzw4wcmk.us-west-2.rds.amazonaws.com:3306/zlzy?charset=utf8', pool_recycle=3600, echo=True)
+        engine = create_engine()
         connection = engine.connect()
         t = text("select telephone from zlzy.cable_company_info where address2 like :x")
         t = t.bindparams(x=distinct)
@@ -33,7 +33,8 @@ def sendsms(appkey, mobile, tpl_id, tpl_value):
 
 
 if __name__ == '__main__':
-    appkey = '87c08ff081da89551097faa422833582'  # 您申请的短信服务appkey
+    appkey = ''
+
     tpl_id = '20480'  # 申请的短信模板ID,根据实际情况修改
     tpl_value = ''  # 短信模板变量,根据实际情况修改
     result = connect_mysql('测试地址')
